@@ -1,0 +1,61 @@
+# Halshow settings
+# This file is generated automatically.
+wm geometry . 1920x1024+0+269
+placeFrames 0.3
+set ::ratio 0.3
+set ::old_w_leftf 160
+set ::watchlist {
+    pin+spindle.0.at-speed
+    pin+spindle.0.forward
+    pin+spindle.0.reverse
+    pin+spindle.0.revs
+    pin+spindle.0.speed-in
+    pin+spindle.0.speed-out
+    pin+spindle.0.speed-out-abs
+    pin+spindle.0.speed-out-rps
+    pin+spindle.0.speed-out-rps-abs
+    pin+hm2_5i25.0.7i77.0.0.input-01
+    pin+hm2_5i25.0.7i77.0.1.analogout0
+    pin+hm2_5i25.0.encoder.00.count
+    pin+hm2_5i25.0.encoder.00.index-enable
+    pin+hm2_5i25.0.encoder.00.input-a
+    pin+hm2_5i25.0.encoder.00.input-b
+    pin+hm2_5i25.0.encoder.00.input-index
+    pin+hm2_5i25.0.encoder.00.position
+    pin+hm2_5i25.0.encoder.00.position-latched
+    pin+hm2_5i25.0.encoder.00.quad-error
+    pin+hm2_5i25.0.encoder.00.quad-error-enable
+    pin+hm2_5i25.0.encoder.00.rawcounts
+    pin+hm2_5i25.0.encoder.00.rawlatch
+    pin+hm2_5i25.0.encoder.00.reset
+    pin+hm2_5i25.0.encoder.00.velocity
+    pin+hm2_5i25.0.encoder.00.velocity-rpm
+    pin+hm2_5i25.0.7i77.0.0.output-01
+    pin+hm2_5i25.0.7i77.0.0.output-00
+    pin+hm2_5i25.0.7i77.0.0.output-02
+    pin+hm2_5i25.0.7i77.0.0.output-03
+    pin+hm2_5i25.0.7i77.0.0.output-04
+    pin+hm2_5i25.0.7i77.0.0.output-05
+    pin+hm2_5i25.0.7i77.0.0.output-06
+    pin+hm2_5i25.0.7i77.0.0.output-07
+    pin+hm2_5i25.0.7i77.0.0.output-08
+    pin+hm2_5i25.0.7i77.0.0.output-09
+    pin+hm2_5i25.0.7i77.0.0.output-10
+    pin+hm2_5i25.0.7i77.0.0.output-11
+    pin+hm2_5i25.0.7i77.0.0.output-12
+    pin+hm2_5i25.0.7i77.0.0.output-13
+    pin+hm2_5i25.0.7i77.0.0.output-14
+    pin+hm2_5i25.0.7i77.0.0.output-15
+    sig+tool-change-confirmed
+    sig+tool-number
+    sig+tool-prepare-loopback
+    sig+estop-out
+    param+motion-command-handler.tmax
+}
+set ::workmode showhal
+set ::watchInterval 100
+set ::col1_width 100
+set ::ffmts 
+set ::ifmts 
+set ::alwaysOnTop 0
+set ::autoSaveWatchlist 1
