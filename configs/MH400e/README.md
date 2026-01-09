@@ -1,0 +1,368 @@
+# MAHO MH400E LinuxCNC Konfiguration - Dateierklärung
+
+Diese Dokumentation erklärt alle Dateien in dieser LinuxCNC-Konfiguration und ihre Funktionen.
+
+---
+
+## ⭐ KRITISCHE KONFIGURATIONSDATEIEN
+
+### MH400e.ini
+**Zweck:** Hauptkonfigurationsdatei - enthält ALLE Maschinenparameter  
+**Wichtigkeit:** ⭐⭐⭐ KRITISCH - Ohne diese Datei startet LinuxCNC nicht  
+**Änderungshäufigkeit:** Gelegentlich (für Tuning, Grenzwerte anpassen)  
+**Warnung:** ⚠️ Von PNCconf generiert - kann beim Regenerieren überschrieben werden
+
+**Enthält:**
+- Maschinenidentität und Version
+- Display-Einstellungen (GUI-Typ, Einheiten, Geschwindigkeiten)
+- Bewegungsparameter (Bahnplanung, Zykluszeiten)
+- Achsen-/Gelenkkonfiguration (Limits, Geschwindigkeiten, Beschleunigungen)
+- HAL-Dateien Ladereihenfolge
+- Werkzeugtabellen-Speicherort
+- PID-Tuning-Parameter für Servoregelung
+- Kinematik-Konfiguration
+- MESA 5i25/7i77 Hardware-Einstellungen
+
+### MH400e.hal
+**Zweck:** Haupt-Hardware-Abstraktionsschicht - "Verkabelungsplan" in Software  
+**Wichtigkeit:** ⭐⭐⭐ KRITISCH  
+**Änderungshäufigkeit:** Selten  
+**Warnung:** ⚠️ Von PNCconf generiert - kann überschrieben werden
+
+**Funktionen:**
+- Lädt Realtime-Komponenten und Treiber (MESA Karten, PID-Regler)
+- Verbindet Achsen mit Hardware
+- Konfiguriert Encoder-Rückmeldungen
+- Verbindet Spindel-Steuerung
+- Lädt benutzerdefinierte Gearbox-Komponente
+- Definiert Signal-Verbindungen zwischen Komponenten
+
+---
+
+## ✅ BENUTZERDEFINIERTE DATEIEN (Sicher zu ändern)
+
+### custom.hal
+**Zweck:** Ihre eigenen HAL-Anpassungen  
+**Wichtigkeit:** ⭐⭐ Wichtig für Ihre Zusätze  
+**Änderungshäufigkeit:** Nach Bedarf  
+**Vorteil:** ✅ Überlebt PNCconf-Regenerierung
+
+Nutzen Sie diese Datei für:
+- Zusätzliche Hardware-Verbindungen
+- Custom I/O-Konfiguration
+- Eigene Signal-Verkabelung
+- Zusätzliche Komponenten laden
+
+### custom_postgui.hal
+**Zweck:** HAL-Verbindungen die NACH dem GUI-Start ausgeführt werden  
+**Wichtigkeit:** ⭐⭐ Für GUI-bezogene Anpassungen  
+**Änderungshäufigkeit:** Nach Bedarf  
+**Vorteil:** ✅ Überlebt PNCconf-Regenerierung
+
+Nutzen Sie diese Datei für:
+- Verbindungen zu GUI-Elementen (Buttons, LEDs, etc.)
+- Verknüpfungen mit PyVCP/GladeVCP Panels
+- Anzeigeelemente
+
+### custom_gvcp.hal
+**Zweck:** Spezielle Verbindungen für GladeVCP Custom Panels  
+**Wichtigkeit:** ⭐ Optional  
+**Änderungshäufigkeit:** Bei GladeVCP-Nutzung
+
+### shutdown.hal
+**Zweck:** Wird beim LinuxCNC-Herunterfahren ausgeführt  
+**Wichtigkeit:** ⭐⭐ Für sichere Abschaltung  
+**Änderungshäufigkeit:** Selten
+
+Nutzen Sie diese Datei für:
+- Hardware in sicheren Zustand versetzen beim Beenden
+- Ausgänge deaktivieren
+- Position speichern
+
+---
+
+## 🔧 WERKZEUG- UND STATUSDATEIEN
+
+### tool.tbl
+**Zweck:** Werkzeugdatenbank mit Abmessungen  
+**Wichtigkeit:** ⭐⭐ Wichtig für korrekte Bearbeitung  
+**Änderungshäufigkeit:** ✅ HÄUFIG - Bei jedem Werkzeugwechsel/-vermessung
+
+**Format:**
+```
+T1 P1 Z123.456 D12.7 ;Kommentar
+```
+- T = Werkzeugnummer
+- P = Platz im Werkzeugwechsler
+- Z = Längenkorrektur (mm)
+- D = Durchmesser (mm)
+- ; = Beschreibung des Werkzeugs
+
+**Aktualisierung:** Messen Sie Werkzeuge und tragen Sie die Werte hier ein
+
+### linuxcnc.var
+**Zweck:** Persistente G-Code Variablen  
+**Wichtigkeit:** ⭐⭐ Speichert wichtige Daten  
+**Änderungshäufigkeit:** ❌ NIEMALS MANUELL BEARBEITEN - automatisch verwaltet
+
+**Speichert:**
+- Werkstück-Koordinatensysteme (G54-G59.3)
+- Werkzeugoffsets
+- Tastergebnisse
+- Benutzerdefinierte Variablen
+
+**Backup:** `.var.bak` wird automatisch erstellt
+
+### linuxcnc.var.bak
+**Zweck:** Automatisches Backup der `.var` Datei  
+**Wichtigkeit:** ⭐ Sicherheitskopie  
+**Änderungshäufigkeit:** Automatisch bei jedem LinuxCNC-Start
+
+---
+
+## 🔩 CUSTOM KOMPONENTEN (Fortgeschritten)
+
+### mh400e-linuxcnc-master/ Verzeichnis
+Enthält die benutzerdefinierte Gearbox-Steuerung für die MH400E
+
+#### mh400e_gearbox.comp
+**Zweck:** Hauptkomponente für automatische Getriebesteuerung  
+**Wichtigkeit:** ⭐⭐⭐ KRITISCH für Spindelbetrieb  
+**Änderungshäufigkeit:** Sehr selten (nur bei Änderungen der Getriebe-Logik)  
+**Typ:** Realtime HAL-Komponente in C
+
+**Funktionen:**
+- Automatisches Schalten der Gänge basierend auf Spindeldrehzahl
+- Überwacht 12 Positionssensoren (4 pro Getriebestufe)
+- Steuert 8 Ausgänge (Motoren, Kupplungen, Richtungsumkehr)
+- Implementiert "Twitching" (Mikrobewegungen zum Ausrichten der Zahnräder)
+- Verhindert Beschädigung durch falsche Gangwechsel
+
+**Kompilierung:** Wird zu `.so` Datei kompiliert und in HAL geladen
+
+#### mh400e_gearbox_sim.comp
+**Zweck:** Simulationsversion für Tests ohne Hardware  
+**Wichtigkeit:** ⭐ Nur für Entwicklung/Tests
+
+#### Unterstützende C-Dateien:
+- **mh400e_gears.c/.h** - Gangwahl-Logik und Tabellen
+- **mh400e_twitch.c/.h** - Zahnrad-Ausrichtungsalgorithmen  
+- **mh400e_util.c/.h** - Hilfsfunktionen
+- **mh400e_common.h** - Gemeinsame Definitionen
+
+#### Makefile
+**Zweck:** Build-Skript zum Kompilieren der Komponenten  
+**Nutzung:** `make` im Verzeichnis ausführen
+
+#### README.md
+**Zweck:** Englische Dokumentation der Gearbox-Komponente
+
+#### mh400e_gearbox.xml
+**Zweck:** Dokumentation für HAL-Komponenten-Viewer
+
+#### LICENSE, COPYING
+**Zweck:** Lizenzinformationen (GPL v2)
+
+---
+
+## 📋 KONFIGURATIONSGENERATOR
+
+### MH400e.pncconf
+**Zweck:** PNCconf-Konfigurationsdaten (XML-Format)  
+**Wichtigkeit:** ⭐⭐ Zum Regenerieren der Konfiguration  
+**Änderungshäufigkeit:** Bei Hardware-Änderungen  
+**Warnung:** ⚠️ Nur über PNCconf-GUI bearbeiten!
+
+**Enthält:**
+- Alle Maschinenparameter in strukturierter Form
+- Hardware-Zuordnungen (MESA Karten, I/O)
+- Wird verwendet um `.ini` und `.hal` Dateien neu zu generieren
+
+**Nutzung:** 
+1. PNCconf starten
+2. Diese Datei laden
+3. Änderungen vornehmen
+4. "Apply" klicken → regeneriert `.ini` und `.hal`
+
+---
+
+## 💾 AUTOMATISCH GESPEICHERTE EINSTELLUNGEN
+
+### autosave.halscope
+**Zweck:** HALscope Anzeige-Einstellungen  
+**Wichtigkeit:** ⭐ Komfort  
+**Änderungshäufigkeit:** Automatisch  
+**Status:** ✅ Sicher zu löschen - wird neu erstellt
+
+Speichert:
+- Welche Signale angezeigt werden
+- Zeitbasis und Trigger-Einstellungen
+- Fenstergröße
+
+### halshow.preferences
+**Zweck:** HALshow Fenster-Layout und Beobachtungsliste  
+**Wichtigkeit:** ⭐ Komfort  
+**Änderungshäufigkeit:** Automatisch  
+**Status:** ✅ Sicher zu löschen - wird neu erstellt
+
+Speichert:
+- Fensterposition und -größe
+- Erweiterte/Zusammengeklappte Bereiche
+- "Watch"-Liste für häufig betrachtete Signale
+
+---
+
+## 📁 VERZEICHNISSE
+
+### backups/
+**Zweck:** Für manuelle Konfigurationsbackups  
+**Status:** Aktuell leer  
+**Empfehlung:** Nutzen Sie dieses Verzeichnis um wichtige Dateien zu sichern bevor Sie größere Änderungen vornehmen
+
+**Empfohlene Backups:**
+```bash
+# Backup vor Änderungen erstellen:
+cp MH400e.ini backups/MH400e.ini.$(date +%Y%m%d_%H%M%S)
+cp MH400e.hal backups/MH400e.hal.$(date +%Y%m%d_%H%M%S)
+cp tool.tbl backups/tool.tbl.$(date +%Y%m%d_%H%M%S)
+```
+
+### mh400e-linuxcnc-master/doc/
+**Zweck:** Zusätzliche Dokumentation für die Gearbox-Komponente  
+**Inhalt:** Diagramme, Erklärungen, Timing-Informationen
+
+---
+
+## 📊 ÜBERSICHTSTABELLE
+
+| Datei | Zweck | Wichtigkeit | Ändern? | Häufigkeit |
+|-------|-------|-------------|---------|------------|
+| MH400e.ini | Maschinenparameter | ⭐⭐⭐ | ⚠️ Vorsicht | Gelegentlich |
+| MH400e.hal | Hardware-Verkabelung | ⭐⭐⭐ | ⚠️ Vorsicht | Selten |
+| custom.hal | Ihre HAL-Zusätze | ⭐⭐ | ✅ Ja | Nach Bedarf |
+| custom_postgui.hal | GUI HAL-Zusätze | ⭐⭐ | ✅ Ja | Nach Bedarf |
+| custom_gvcp.hal | GladeVCP Verbindungen | ⭐ | ✅ Ja | Bei Bedarf |
+| shutdown.hal | Abschalt-Routine | ⭐⭐ | ✅ Ja | Selten |
+| tool.tbl | Werkzeugdaten | ⭐⭐ | ✅ Ja | **Häufig** |
+| linuxcnc.var | G-Code Variablen | ⭐⭐ | ❌ Nein | Automatisch |
+| MH400e.pncconf | PNCconf Daten | ⭐⭐ | ⚠️ Nur via GUI | Bei HW-Änderung |
+| mh400e_gearbox.comp | Getriebe-Komponente | ⭐⭐⭐ | ⚠️ Experten | Sehr selten |
+| autosave.halscope | HALscope Einst. | ⭐ | - | Automatisch |
+| halshow.preferences | HALshow Einst. | ⭐ | - | Automatisch |
+
+---
+
+## 🔄 DATEI-ABHÄNGIGKEITEN
+
+```
+MH400e.ini (Master-Konfiguration)
+  │
+  ├─→ Lädt: MH400e.hal
+  │          ├─→ Lädt MESA Treiber (hm2_pci)
+  │          ├─→ Lädt mh400e_gearbox.so
+  │          └─→ Verbindet alle Signale
+  │
+  ├─→ Lädt: custom.hal (Ihre Anpassungen)
+  │
+  ├─→ Startet: GUI (AXIS oder andere)
+  │
+  ├─→ Lädt: custom_postgui.hal (nach GUI-Start)
+  │
+  ├─→ Lädt: custom_gvcp.hal (für Custom Panels)
+  │
+  ├─→ Beim Beenden: shutdown.hal
+  │
+  ├─→ Referenziert: tool.tbl (Werkzeugdaten)
+  │
+  └─→ Referenziert: linuxcnc.var (Persistente Daten)
+```
+
+---
+
+## 🛠️ WARTUNGS-CHECKLISTE
+
+### Täglich / Bei jedem Werkzeugwechsel:
+- [ ] `tool.tbl` aktualisieren mit neuen Werkzeugmaßen
+
+### Wöchentlich / Monatlich:
+- [ ] Backup von `linuxcnc.var` erstellen (Werkstück-Nullpunkte!)
+- [ ] Backup von `tool.tbl` erstellen
+
+### Bei Tuning/Optimierung:
+- [ ] Änderungen in `MH400e.ini` vornehmen
+- [ ] Backup VOR der Änderung erstellen
+- [ ] Testen und dokumentieren
+
+### Bei Hardware-Änderungen:
+- [ ] PNCconf öffnen (`MH400e.pncconf` laden)
+- [ ] Änderungen vornehmen
+- [ ] Apply klicken
+- [ ] `custom*.hal` Dateien prüfen (werden nicht überschrieben)
+- [ ] Testen!
+
+### Bei Software-Updates:
+- [ ] Komplettes Backup aller Dateien
+- [ ] Besonders: `.var`, `.tbl`, `custom*.hal`
+
+---
+
+## ⚡ SCHNELLREFERENZ: WAS TUN WENN...
+
+### "Ich möchte ein neues Signal/I/O hinzufügen"
+→ In `custom.hal` oder `custom_postgui.hal` eintragen
+
+### "Ich möchte Geschwindigkeiten/Beschleunigungen ändern"
+→ `MH400e.ini` bearbeiten (oder via PNCconf)
+
+### "Ich habe ein neues Werkzeug"
+→ `tool.tbl` aktualisieren
+
+### "Ich möchte die Hardware-Konfiguration ändern"
+→ PNCconf öffnen, `MH400e.pncconf` laden, ändern, Apply
+
+### "LinuxCNC startet nicht mehr"
+→ Prüfen: `.ini` Datei, HAL Dateien auf Syntax-Fehler  
+→ Terminal öffnen: `linuxcnc MH400e.ini` für Fehlermeldungen
+
+### "Ich habe einen Fehler in .ini oder .hal gemacht"
+→ Backup wiederherstellen ODER PNCconf neu generieren lassen
+
+### "Werkstück-Nullpunkte sind weg"
+→ `linuxcnc.var.bak` nach `linuxcnc.var` kopieren
+
+---
+
+## 📞 TECHNISCHE DETAILS
+
+**Hardware:**
+- CNC Controller: MESA 5i25 (PCI FPGA Karte)
+- I/O Interface: MESA 7i77 (Servo/Analog Interface)
+- Achsen: 3 (X, Y, Z) mit geschlossenem Regelkreis
+- Encoder: Direkt an Servomotoren
+- Spindel: Mechanisches Getriebe mit automatischer Steuerung
+
+**Software:**
+- LinuxCNC Version: Wie in `.ini` definiert
+- Realtime: PREEMPT-RT oder RTAI
+- GUI: AXIS (Standard) oder andere
+
+**Besonderheiten:**
+- Custom Gearbox-Komponente für MAHO MH400E Spindel
+- Automatisches Gangwechseln
+- Überwachung der Getriebeposition
+- Twitch-Funktion für präzises Ausrichten
+
+---
+
+## 📚 WEITERE INFORMATIONEN
+
+- HAL-Konzepte: LinuxCNC Documentation → HAL Tutorial
+- INI-Datei Referenz: LinuxCNC Documentation → INI Configuration
+- PNCconf: LinuxCNC Documentation → Configuration Wizards
+- Gearbox-Komponente: `mh400e-linuxcnc-master/README.md`
+
+---
+
+**Letzte Aktualisierung:** 09.01.2026  
+**Konfiguration für:** MAHO MH400E Fräsmaschine  
+**Erstellt von:** GitHub Copilot
