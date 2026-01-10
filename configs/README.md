@@ -347,7 +347,10 @@ Digitale Ausgänge (TB8 OUT0..15, Open-Collector):
 
 | Funktion                     | HAL-Pin                       | 7i77-Klemme |
 | ---------------------------- | ----------------------------- | ----------- |
+| frei                         | hm2_5i25.0.7i77.0.0.output-00 | OUT0 (TB8)  |
 | machine-is-on (Relais 19K1)  | hm2_5i25.0.7i77.0.0.output-01 | OUT1 (TB8)  |
+| tool-unclamp (M64/M65 P2)    | hm2_5i25.0.7i77.0.0.output-02 | OUT2 (TB8)  |
+| frei                         | hm2_5i25.0.7i77.0.0.output-03 | OUT3 (TB8)  |
 | spindle-on                   | hm2_5i25.0.7i77.0.0.output-04 | OUT4 (TB8)  |
 | spindle-cw                   | hm2_5i25.0.7i77.0.0.output-05 | OUT5 (TB8)  |
 | spindle-ccw                  | hm2_5i25.0.7i77.0.0.output-06 | OUT6 (TB8)  |
@@ -365,7 +368,22 @@ Digitale Eingänge (TB6 IN0..15, TB7 IN16..31, Sinking):
 
 | Funktion              | HAL-Pin                      | 7i77-Klemme |
 | --------------------- | ---------------------------- | ----------- |
+| frei                  | hm2_5i25.0.7i77.0.0.input-00 | IN0 (TB6)   |
 | spindle-stopped       | hm2_5i25.0.7i77.0.0.input-01 | IN1 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-02 | IN2 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-03 | IN3 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-04 | IN4 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-05 | IN5 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-06 | IN6 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-07 | IN7 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-08 | IN8 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-09 | IN9 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-10 | IN10 (TB6)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-11 | IN11 (TB6)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-12 | IN12 (TB6)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-13 | IN13 (TB6)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-14 | IN14 (TB6)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-15 | IN15 (TB6)  |
 | reducer-left          | hm2_5i25.0.7i77.0.0.input-16 | IN16 (TB7)  |
 | reducer-right         | hm2_5i25.0.7i77.0.0.input-17 | IN17 (TB7)  |
 | reducer-center        | hm2_5i25.0.7i77.0.0.input-18 | IN18 (TB7)  |
@@ -378,6 +396,10 @@ Digitale Eingänge (TB6 IN0..15, TB7 IN16..31, Sinking):
 | input-right           | hm2_5i25.0.7i77.0.0.input-25 | IN25 (TB7)  |
 | input-center          | hm2_5i25.0.7i77.0.0.input-26 | IN26 (TB7)  |
 | input-left-center     | hm2_5i25.0.7i77.0.0.input-27 | IN27 (TB7)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-28 | IN28 (TB7)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-29 | IN29 (TB7)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-30 | IN30 (TB7)  |
+| frei                  | hm2_5i25.0.7i77.0.0.input-31 | IN31 (TB7)  |
 
 Analoge Ausgänge (TB5 AOUT0..5 + ENA0..5):
 
