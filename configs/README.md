@@ -341,6 +341,61 @@ MH400e.ini (Master-Konfiguration)
 - Encoder: Direkt an Servomotoren
 - Spindel: Mechanisches Getriebe mit automatischer Steuerung
 
+**Mesa I/O Zuordnung (aus MH400e.hal, Klemmen laut 7i77-Layout):**
+
+Digitale Ausgänge (TB8 OUT0..15, Open-Collector):
+
+| Funktion                     | HAL-Pin                       | 7i77-Klemme |
+| ---------------------------- | ----------------------------- | ----------- |
+| machine-is-on (Relais 19K1)  | hm2_5i25.0.7i77.0.0.output-01 | OUT1 (TB8)  |
+| spindle-on                   | hm2_5i25.0.7i77.0.0.output-04 | OUT4 (TB8)  |
+| spindle-cw                   | hm2_5i25.0.7i77.0.0.output-05 | OUT5 (TB8)  |
+| spindle-ccw                  | hm2_5i25.0.7i77.0.0.output-06 | OUT6 (TB8)  |
+| coolant-flood                | hm2_5i25.0.7i77.0.0.output-07 | OUT7 (TB8)  |
+| set-shaft-motor-lowspeed     | hm2_5i25.0.7i77.0.0.output-08 | OUT8 (TB8)  |
+| activate-reducer-motor       | hm2_5i25.0.7i77.0.0.output-09 | OUT9 (TB8)  |
+| activate-midrange-motor      | hm2_5i25.0.7i77.0.0.output-10 | OUT10 (TB8) |
+| activate-input-stage-motor   | hm2_5i25.0.7i77.0.0.output-11 | OUT11 (TB8) |
+| set-reverse-shaft-motor      | hm2_5i25.0.7i77.0.0.output-12 | OUT12 (TB8) |
+| set-gear-shift-start         | hm2_5i25.0.7i77.0.0.output-13 | OUT13 (TB8) |
+| activate-spindle-twitch-cw   | hm2_5i25.0.7i77.0.0.output-14 | OUT14 (TB8) |
+| activate-spindle-twitch-ccw  | hm2_5i25.0.7i77.0.0.output-15 | OUT15 (TB8) |
+
+Digitale Eingänge (TB6 IN0..15, TB7 IN16..31, Sinking):
+
+| Funktion              | HAL-Pin                      | 7i77-Klemme |
+| --------------------- | ---------------------------- | ----------- |
+| spindle-stopped       | hm2_5i25.0.7i77.0.0.input-01 | IN1 (TB6)   |
+| reducer-left          | hm2_5i25.0.7i77.0.0.input-16 | IN16 (TB7)  |
+| reducer-right         | hm2_5i25.0.7i77.0.0.input-17 | IN17 (TB7)  |
+| reducer-center        | hm2_5i25.0.7i77.0.0.input-18 | IN18 (TB7)  |
+| reducer-left-center   | hm2_5i25.0.7i77.0.0.input-19 | IN19 (TB7)  |
+| middle-left           | hm2_5i25.0.7i77.0.0.input-20 | IN20 (TB7)  |
+| middle-right          | hm2_5i25.0.7i77.0.0.input-21 | IN21 (TB7)  |
+| middle-center         | hm2_5i25.0.7i77.0.0.input-22 | IN22 (TB7)  |
+| middle-left-center    | hm2_5i25.0.7i77.0.0.input-23 | IN23 (TB7)  |
+| input-left            | hm2_5i25.0.7i77.0.0.input-24 | IN24 (TB7)  |
+| input-right           | hm2_5i25.0.7i77.0.0.input-25 | IN25 (TB7)  |
+| input-center          | hm2_5i25.0.7i77.0.0.input-26 | IN26 (TB7)  |
+| input-left-center     | hm2_5i25.0.7i77.0.0.input-27 | IN27 (TB7)  |
+
+Analoge Ausgänge (TB5 AOUT0..5 + ENA0..5):
+
+| Funktion                 | HAL-Pin                         | 7i77-Klemme               |
+| ------------------------ | ------------------------------- | ------------------------- |
+| X Antrieb                | hm2_5i25.0.7i77.0.1.analogout0  | AOUT0 / ENA0 (TB5)        |
+| Y Antrieb                | hm2_5i25.0.7i77.0.1.analogout1  | AOUT1 / ENA1 (TB5)        |
+| Z Antrieb                | hm2_5i25.0.7i77.0.1.analogout2  | AOUT2 / ENA2 (TB5)        |
+| Enable alle Analogkanäle | hm2_5i25.0.7i77.0.1.analogena | ENA0..5 (gemeinsame Klemme) |
+
+Encoder (SubD/Stecker pro Achse):
+
+| Funktion    | HAL-Pin                    | 7i77-Anschluss |
+| ----------- | -------------------------- | -------------- |
+| X Feedback  | hm2_5i25.0.encoder.00.*    | ENC0           |
+| Y Feedback  | hm2_5i25.0.encoder.01.*    | ENC1           |
+| Z Feedback  | hm2_5i25.0.encoder.02.*    | ENC2           |
+
 **Software:**
 - LinuxCNC Version: Wie in `.ini` definiert
 - Realtime: PREEMPT-RT oder RTAI

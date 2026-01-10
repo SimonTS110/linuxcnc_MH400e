@@ -36,10 +36,6 @@ addf hm2_5i25.0.write         servo-thread
 #Output MACHINE-IS-ON to latch the 19K1 relay.
 net machine-is-on => hm2_5i25.0.7i77.0.0.output-01
 
-# --- Z BRAKE ---
-#Release Z brake when machine-is-on
-#net machine-is-on => hm2_5i25.0.7i77.0.0.output-02
-
 # --- COOLANT-FLOOD ---
 net coolant-flood hm2_5i25.0.7i77.0.0.output-07
 
