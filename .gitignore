@@ -1,0 +1,16 @@
+# Ignore everything by default
+/*
+
+# Keep the gitignore itself
+!.gitignore
+
+# Allow configs directory
+!/configs/
+
+# Inside configs, ignore everything by default
+/configs/*
+
+# Allow the required files/folders inside configs
+!/configs/README.md
+!/configs/MH400e.pncconf
+!/configs/MH400e/
