@@ -375,8 +375,8 @@ Digitale Eingänge (TB6 IN0..15, TB7 IN16..31, Sinking):
 | --------------------- | ---------------------------- | ----------- |
 | frei                  | hm2_5i25.0.7i77.0.0.input-00 | IN0 (TB6)   |
 | spindle-stopped       | hm2_5i25.0.7i77.0.0.input-01 | IN1 (TB6)   |
+| frei                  | hm2_5i25.0.7i77.0.0.input-02 | IN2 (TB6)   |
 | estop-chain-ok (24V)  | hm2_5i25.0.7i77.0.0.input-03 | IN3 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-03 | IN3 (TB6)   |
 | frei                  | hm2_5i25.0.7i77.0.0.input-04 | IN4 (TB6)   |
 | frei                  | hm2_5i25.0.7i77.0.0.input-05 | IN5 (TB6)   |
 | frei                  | hm2_5i25.0.7i77.0.0.input-06 | IN6 (TB6)   |
