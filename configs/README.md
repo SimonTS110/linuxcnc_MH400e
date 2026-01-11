@@ -401,7 +401,7 @@ Digitale Eingänge (TB6 IN0..15, TB7 IN16..31, Sinking):
 | frei                  | hm2_5i25.0.7i77.0.0.input-30 | IN30 (TB7)  |
 | frei                  | hm2_5i25.0.7i77.0.0.input-31 | IN31 (TB7)  |
 
-**E-Stop (Hardware-only):** IN2 (hm2_5i25.0.7i77.0.0.input-02) führt 24V, solange der Not-Aus-Kreis geschlossen ist. Dieser Eingang steuert direkt `iocontrol.0.emc-enable-in`; bei Spannungsverlust (Not-Aus gedrückt) fällt LinuxCNC sofort in E-Stop. Zusätzlich wird `motion.e-stop-in` aktiv, damit die Bewegungsschicht sofort stoppt.
+**E-Stop (Hardware-only):** IN2 (hm2_5i25.0.7i77.0.0.input-02) führt 24V, solange der Not-Aus-Kreis geschlossen ist. Dieser Eingang steuert direkt `iocontrol.0.emc-enable-in`; bei Spannungsverlust (Not-Aus gedrückt) fällt LinuxCNC sofort in E-Stop.
 
 Analoge Ausgänge (TB5 AOUT0..5 + ENA0..5):
 

@@ -19,8 +19,6 @@ loadrt pid names=pid.x,pid.y,pid.z,pid.s
 #Gearbox Control
 loadrt mh400e_gearbox
 
-loadrt not count=1
-
 addf hm2_5i25.0.read          servo-thread
 addf motion-command-handler   servo-thread
 addf motion-controller        servo-thread
@@ -28,7 +26,6 @@ addf pid.x.do-pid-calcs       servo-thread
 addf pid.y.do-pid-calcs       servo-thread
 addf pid.z.do-pid-calcs       servo-thread
 addf pid.s.do-pid-calcs       servo-thread
-addf not.0                    servo-thread
 addf hm2_5i25.0.write         servo-thread
 
 #*******************
@@ -305,10 +302,8 @@ net machine-is-enabled        <=  motion.motion-enabled
 #  ---digital in / out signals---
 
 #  ---estop signals--- (rein hardwaregeführt: 7i77 IN02)
-# 24V an IN02 = OK; Spannung weg = Not-Aus. Motion bekommt ein aktives Signal bei Spannungsverlust.
+# 24V an IN02 = OK; Spannung weg = Not-Aus. Direkt auf emc-enable-in geführt.
 net estop-hw-ok       hm2_5i25.0.7i77.0.0.input-02 => iocontrol.0.emc-enable-in
-net estop-hw-tripped  not.0.out                    => motion.e-stop-in
-net estop-hw-ok       => not.0.in
 
 #  ---manual tool change signals---
 
