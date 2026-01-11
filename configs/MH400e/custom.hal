@@ -1,2 +1,31 @@
 # Include your custom HAL commands here
 # This file will not be overwritten when you run PNCconf again
+
+# ------------------------------------------------------------
+# Feed-hold + Warn bei Schmiermangel (NC-Sensor auf IN29)
+# Wirkung: Vorschub anhalten via motion.feed-inhibit, Warn-Ausgang schalten.
+# ------------------------------------------------------------
+
+# Komponenten laden
+loadrt debounce cfg=1                     # ein Entprellkanal
+loadrt not count=1                        # ein Inverter (NC-Sensor -> aktiv-low)
+
+# Komponenten in den Servo-Thread einhängen
+addf debounce.0     servo-thread
+addf not.0          servo-thread
+
+# Entprellen und invertieren
+setp debounce.0.delay 50                  # ca. 50 Servozyklen ~50 ms bei 1 kHz
+
+# Rohsignal vom 7i77 IN29 holen
+net lube-low-raw hm2_5i25.0.7i77.0.0.input-29 => debounce.0.0.in
+
+# Entprelltes Signal invertieren (Sensor ist NC, aktiv bei 0V)
+net lube-low-clean  debounce.0.0.out => not.0.in
+net lube-low-active not.0.out
+
+# Feed-Hold auslösen
+net lube-low-active => motion.feed-inhibit
+
+# Warn-Ausgang ansteuern (7i77 OUT0 ist frei laut MH400e.hal)
+net lube-low-active => hm2_5i25.0.7i77.0.0.output-00
