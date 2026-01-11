@@ -371,40 +371,40 @@ Digitale Ausgänge (TB8 OUT0..15, Open-Collector):
 
 Digitale Eingänge (TB6 IN0..15, TB7 IN16..31, Sinking):
 
-| Funktion              | HAL-Pin                      | 7i77-Klemme |
-| --------------------- | ---------------------------- | ----------- |
-| frei                  | hm2_5i25.0.7i77.0.0.input-00 | IN0 (TB6)   |
-| spindle-stopped       | hm2_5i25.0.7i77.0.0.input-01 | IN1 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-02 | IN2 (TB6)   |
-| estop-chain-ok (24V)  | hm2_5i25.0.7i77.0.0.input-03 | IN3 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-04 | IN4 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-05 | IN5 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-06 | IN6 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-07 | IN7 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-08 | IN8 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-09 | IN9 (TB6)   |
-| frei                  | hm2_5i25.0.7i77.0.0.input-10 | IN10 (TB6)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-11 | IN11 (TB6)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-12 | IN12 (TB6)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-13 | IN13 (TB6)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-14 | IN14 (TB6)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-15 | IN15 (TB6)  |
-| reducer-left          | hm2_5i25.0.7i77.0.0.input-16 | IN16 (TB7)  |
-| reducer-right         | hm2_5i25.0.7i77.0.0.input-17 | IN17 (TB7)  |
-| reducer-center        | hm2_5i25.0.7i77.0.0.input-18 | IN18 (TB7)  |
-| reducer-left-center   | hm2_5i25.0.7i77.0.0.input-19 | IN19 (TB7)  |
-| middle-left           | hm2_5i25.0.7i77.0.0.input-20 | IN20 (TB7)  |
-| middle-right          | hm2_5i25.0.7i77.0.0.input-21 | IN21 (TB7)  |
-| middle-center         | hm2_5i25.0.7i77.0.0.input-22 | IN22 (TB7)  |
-| middle-left-center    | hm2_5i25.0.7i77.0.0.input-23 | IN23 (TB7)  |
-| input-left            | hm2_5i25.0.7i77.0.0.input-24 | IN24 (TB7)  |
-| input-right           | hm2_5i25.0.7i77.0.0.input-25 | IN25 (TB7)  |
-| input-center          | hm2_5i25.0.7i77.0.0.input-26 | IN26 (TB7)  |
-| input-left-center     | hm2_5i25.0.7i77.0.0.input-27 | IN27 (TB7)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-28 | IN28 (TB7)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-29 | IN29 (TB7)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-30 | IN30 (TB7)  |
-| frei                  | hm2_5i25.0.7i77.0.0.input-31 | IN31 (TB7)  |
+| Funktion                       | HAL-Pin                      | 7i77-Klemme |
+| ------------------------------ | ---------------------------- | ----------- |
+| frei                           | hm2_5i25.0.7i77.0.0.input-00 | IN0 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-01 | IN1 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-02 | IN2 (TB6)   |
+| estop-chain-ok (24V)           | hm2_5i25.0.7i77.0.0.input-03 | IN3 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-04 | IN4 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-05 | IN5 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-06 | IN6 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-07 | IN7 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-08 | IN8 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-09 | IN9 (TB6)   |
+| frei                           | hm2_5i25.0.7i77.0.0.input-10 | IN10 (TB6)  |
+| frei                           | hm2_5i25.0.7i77.0.0.input-11 | IN11 (TB6)  |
+| frei                           | hm2_5i25.0.7i77.0.0.input-12 | IN12 (TB6)  |
+| frei                           | hm2_5i25.0.7i77.0.0.input-13 | IN13 (TB6)  |
+| frei                           | hm2_5i25.0.7i77.0.0.input-14 | IN14 (TB6)  |
+| frei                           | hm2_5i25.0.7i77.0.0.input-15 | IN15 (TB6)  |
+| reducer-left                   | hm2_5i25.0.7i77.0.0.input-16 | IN16 (TB7)  |
+| reducer-right                  | hm2_5i25.0.7i77.0.0.input-17 | IN17 (TB7)  |
+| reducer-center                 | hm2_5i25.0.7i77.0.0.input-18 | IN18 (TB7)  |
+| reducer-left-center            | hm2_5i25.0.7i77.0.0.input-19 | IN19 (TB7)  |
+| middle-left                    | hm2_5i25.0.7i77.0.0.input-20 | IN20 (TB7)  |
+| middle-right                   | hm2_5i25.0.7i77.0.0.input-21 | IN21 (TB7)  |
+| middle-center                  | hm2_5i25.0.7i77.0.0.input-22 | IN22 (TB7)  |
+| middle-left-center             | hm2_5i25.0.7i77.0.0.input-23 | IN23 (TB7)  |
+| input-left                     | hm2_5i25.0.7i77.0.0.input-24 | IN24 (TB7)  |
+| input-right                    | hm2_5i25.0.7i77.0.0.input-25 | IN25 (TB7)  |
+| input-center                   | hm2_5i25.0.7i77.0.0.input-26 | IN26 (TB7)  |
+| input-left-center              | hm2_5i25.0.7i77.0.0.input-27 | IN27 (TB7)  |
+| spindle-stopped                | hm2_5i25.0.7i77.0.0.input-28 | IN28 (TB7)  |
+| lube-low (entprellt+invertiert)| hm2_5i25.0.7i77.0.0.input-29 | IN29 (TB7)  |
+| frei                           | hm2_5i25.0.7i77.0.0.input-30 | IN30 (TB7)  |
+| frei                           | hm2_5i25.0.7i77.0.0.input-31 | IN31 (TB7)  |
 
 **E-Stop (Hardware-only):** IN3 (hm2_5i25.0.7i77.0.0.input-03) führt 24V, solange der Not-Aus-Kreis geschlossen ist. Dieser Eingang steuert direkt `iocontrol.0.emc-enable-in`; bei Spannungsverlust (Not-Aus gedrückt) fällt LinuxCNC sofort in E-Stop.
 

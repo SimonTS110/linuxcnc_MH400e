@@ -62,7 +62,7 @@ net activate-spindle-twitch-ccw mh400e-gearbox.twitch-ccw          => hm2_5i25.0
 
 #--- GEARBOX CONTROL ---
 net sig_get_commanded_speed  mh400e-gearbox.spindle-speed-in-abs    <= spindle.0.speed-out
-net sig_spindle_status       mh400e-gearbox.spindle-stopped     <= hm2_5i25.0.7i77.0.0.input-01
+net sig_spindle_status       mh400e-gearbox.spindle-stopped     <= hm2_5i25.0.7i77.0.0.input-28
 net sig_reducer_left         mh400e-gearbox.reducer-left        <= hm2_5i25.0.7i77.0.0.input-16
 net sig_reducer_right        mh400e-gearbox.reducer-right       <= hm2_5i25.0.7i77.0.0.input-17
 net sig_reducer_center       mh400e-gearbox.reducer-center      <= hm2_5i25.0.7i77.0.0.input-18
