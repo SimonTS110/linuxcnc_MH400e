@@ -56,7 +56,7 @@ Nutzen Sie diese Datei für:
 **Aktuell implementiert:** Schmiermangel-Interlock (NC-Sensor auf IN29)
 - Eingang `hm2_5i25.0.7i77.0.0.input-29` wird entprellt (`debounce`, 50 Zyklen) und invertiert (`not`).
 - Aktives Signal `lube-low-active` hält den Vorschub an (`motion.feed-inhibit`).
-- Gleiches Signal schaltet eine Warn-Ausgabe auf OUT0 (`hm2_5i25.0.7i77.0.0.output-00`).
+- Ein One-Shot triggert bei Aktivierung eine MDI-Meldung (`M118 Schmierung niedrig – Vorschub angehalten`) über `halui.mdi-command-00`.
 
 ### custom_postgui.hal
 **Zweck:** HAL-Verbindungen die NACH dem GUI-Start ausgeführt werden  

@@ -9,13 +9,16 @@
 # Komponenten laden
 loadrt debounce cfg=1                     # ein Entprellkanal
 loadrt not count=1                        # ein Inverter (NC-Sensor -> aktiv-low)
+loadrt oneshot count=1                    # für einmalige Meldungs-Auslösung
 
 # Komponenten in den Servo-Thread einhängen
 addf debounce.0     servo-thread
 addf not.0          servo-thread
+addf oneshot.0      servo-thread
 
 # Entprellen und invertieren
 setp debounce.0.delay 50                  # ca. 50 Servozyklen ~50 ms bei 1 kHz
+setp oneshot.0.width 0.10                 # 100 ms Puls für MDI-Meldung
 
 # Rohsignal vom 7i77 IN29 holen
 net lube-low-raw hm2_5i25.0.7i77.0.0.input-29 => debounce.0.0.in
@@ -27,5 +30,7 @@ net lube-low-active not.0.out
 # Feed-Hold auslösen
 net lube-low-active => motion.feed-inhibit
 
-# Warn-Ausgang ansteuern (7i77 OUT0 ist frei laut MH400e.hal)
-net lube-low-active => hm2_5i25.0.7i77.0.0.output-00
+# Meldung in der GUI auslösen (MDI: M118 ...)
+net lube-low-active => oneshot.0.in
+net lube-low-msg     oneshot.0.out => halui.mdi-command-00
+

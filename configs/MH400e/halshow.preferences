@@ -49,10 +49,12 @@ set ::watchlist {
     sig+tool-change-confirmed
     sig+tool-number
     sig+tool-prepare-loopback
-    sig+estop-out
     param+motion-command-handler.tmax
+    sig+lube-low-raw
+    sig+lube-low-clean
+    sig+lube-low-active
 }
-set ::workmode showhal
+set ::workmode watchhal
 set ::watchInterval 100
 set ::col1_width 100
 set ::ffmts 
